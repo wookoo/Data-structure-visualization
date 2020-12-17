@@ -88,7 +88,6 @@ class StackLinkedList{
       this.tail = newNode;
     }
 
-    console.log(this.head);
 
     this.que.push(newNode); //현재 까지 생성된 정보 큐에 넣기
     //this.drawQueue();
@@ -276,4 +275,3 @@ class StackLinkedList{
 }
 
 var k = new StackLinkedList();
-var h = k.head;
