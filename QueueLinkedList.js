@@ -51,7 +51,6 @@ class StackLinkedList{
     this.drawTask.splice(0,1);
     if(this.drawTask.length == 0){
       this.enableUI();
-      //this.nextButton.disabled = true;
     }
   }
 
@@ -79,9 +78,18 @@ class StackLinkedList{
     console.log(value);
 
     ///this.disableUI();
-    var newNode = new Node(value,this.tail); //새로운 노드 생성
+    var newNode = new Node(value,null); //새로운 노드 생성
+    if(this.head == null){
+      this.head = newNode;
+      this.tail = newNode; //top 변환, push 끝
+    }
+    else{
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
 
-    this.tail = newNode; //top 변환, push 끝
+    console.log(this.head);
+
     this.que.push(newNode); //현재 까지 생성된 정보 큐에 넣기
     //this.drawQueue();
     var x = (this.que.length-1)*100
@@ -109,7 +117,7 @@ class StackLinkedList{
 
 
 
-*/
+
 
   }
   deque(){//pop 버튼을 눌렀을때 할일
@@ -121,46 +129,64 @@ class StackLinkedList{
       return;
     }
     this.returnData = this.head.value;
+    console.log("데큐 콜"+this.head.value);
     this.head = this.head.next;
-    this.que.splice(this.que.length-1,1);
+    if(this.head == null){
+      this.tail = null;
+    }
+    this.que.splice(0,1);
     // TODO: 변화하는 과정 그리기, 그리는동안 푸쉬 팝 불가
-    this.nextButton.disabled = false;
     this.disableUI();
 
     // TODO:  그리기 시작
+    console.log(this.head);
     this.drawTask.push(()=>{
       ctx.font = '15px Arial';
       ctx.fillStyle = "#fef";
       ctx.fillRect(20,5,100,30);
       ctx.fillStyle = "#000";
       ctx.fillText("반환값 : " + this.returnData,20,30);
+      console.log("this.returnData"+this.returnData);
     })
     this.drawTask.push(()=>{
       ctx.beginPath();
       ctx.font = '15px Arial';
-      ctx.fillText("TOP",900-(this.que.length)*100+20,220);
+      ctx.fillText("Head",150,220);
       ctx.fillStyle = "#fef"; //#fef
-      ctx.fillRect(900-(this.que.length+1)*100,205,50,50);
+      ctx.fillRect(0,205,100,100);
       ctx.fill();
       ctx.closePath();
     });
+    if(this.head == null){
+      this.drawTask.push(()=>{
+        ctx.fillStyle = "#fef";
+        ctx.fillRect(0,90,2000,50);
+        ctx.fillStyle = "#000";
+        ctx.fillText("Tail",100+50,140);
+
+      })
+    }
+
+
     this.drawTask.push(()=>{
       ctx.fillStyle = "#000";
-      this.drawStack();
+      if(this.head == null){
+        this.initBoard();
+      }else{
+        this.drawQueue();
+      }
+
       ctx.fillText("반환값 : " + this.returnData,20,30);
     });
 
 
-
-    //this.enableUI();
   }
   reset(){//리셋 버튼을 눌렀을때 할 일
 
     this.head = null;
     this.que = [];
     this.initBoard();
-    this.nextButton.disabled = true;
-    this.backButton.disabled = true;
+    this.enableUI();
     // TODO: 보드 초기화
 
   }
@@ -169,12 +195,14 @@ class StackLinkedList{
     for(var i = 0; i < this.navigator.length;i++){
       this.navigator[i].disabled = true;
     }
+    this.nextButton.disabled = false;
 
   }
   enableUI(){
     for(var i = 0; i < this.navigator.length;i++){
       this.navigator[i].disabled = false;
     }
+    this.nextButton.disabled = true;
   }
 
 
@@ -248,3 +276,4 @@ class StackLinkedList{
 }
 
 var k = new StackLinkedList();
+var h = k.head;
