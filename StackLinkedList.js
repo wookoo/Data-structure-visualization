@@ -67,7 +67,7 @@ class StackLinkedList{
 
       this.initBoard();
       this.drawStack();
-      ctx.font = '10px Arial';
+      ctx.font = '15px Arial';
       ctx.fillText("스택이 가득차서 삽입 불가! (할당 가능공간 없음)" ,20,30);
       return;
     }
@@ -101,7 +101,7 @@ class StackLinkedList{
     if(!this.top){//스택이 비었으면
       // TODO: 스택이 비어서 삭제 불가
       this.initBoard();
-      ctx.font = '10px Arial';
+      ctx.font = '15px Arial';
       ctx.fillText("스택이 비어서 삭제 불가!" ,20,30);
       return;
     }
@@ -114,7 +114,7 @@ class StackLinkedList{
 
     // TODO:  그리기 시작
     this.drawTask.push(()=>{
-      ctx.font = '10px Arial';
+      ctx.font = '15px Arial';
       ctx.fillStyle = "#fef";
       ctx.fillRect(20,5,100,30);
       ctx.fillStyle = "#000";
@@ -122,10 +122,10 @@ class StackLinkedList{
     })
     this.drawTask.push(()=>{
       ctx.beginPath();
-      ctx.font = '10px Arial';
+      ctx.font = '15px Arial';
       ctx.fillText("TOP",900-(this.stack.length)*100+20,220);
       ctx.fillStyle = "#fef"; //#fef
-      ctx.fillRect(900-(this.stack.length+1)*100,210,50,50);
+      ctx.fillRect(900-(this.stack.length+1)*100,205,50,50);
       ctx.fill();
       ctx.closePath();
     });
@@ -168,7 +168,7 @@ class StackLinkedList{
   initBoard(){
     // TODO: 보드 초기화 그리기
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = '10px Arial';
+    ctx.font = '15px Arial';
     ctx.fillText("TOP",910,220);
     this.drawNullBox()
   }
@@ -182,7 +182,7 @@ class StackLinkedList{
     ctx.moveTo(x+50,y)
     ctx.lineTo(x+50,y+50)
     ctx.stroke();
-    ctx.font = '10px Arial';
+    ctx.font = '15px Arial';
     ctx.fillText(value,x+20,y+30);
     ctx.closePath();
   }
@@ -195,7 +195,7 @@ class StackLinkedList{
       this.drawline(x+60,180,x+110,180);
     }
     ctx.beginPath();
-    ctx.font = '10px Arial';
+    ctx.font = '15px Arial';
     ctx.fillText("TOP",900-(this.stack.length)*100+20,220);
     ctx.fillStyle="#000";
     ctx.closePath();

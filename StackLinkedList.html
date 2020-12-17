@@ -1,9 +1,11 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+
     <title>스택 ( 링크 리스트 기반 )</title>
   </head>
+
   <body>
     <div id="header">
       <h1>스택 ( 연결 리스트 )</h1>
@@ -12,8 +14,16 @@
       <table id = "controller"></table>
     </div>
 
-    <canvas id="canvas" width="1000" height="500"></canvas>
+    <canvas id="canvas" width="1000" height="500" style="background:#fef"></canvas>
+    <div id="playcontrolerdiv">
+      <table id = "playcontroler">
+        <td><input type="button" id = "back" value = "back"></td>
+        <td><input type="button" id = "next" value = "next"></td>
+      </table>
+    </div>
 
 
   </body>
+  <script type = "text/javascript" src = "set.js"> </script>
+  <script type = "text/javascript" src = "StackLinkedList.js"> </script>
 </html>
