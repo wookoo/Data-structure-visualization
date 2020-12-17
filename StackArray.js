@@ -2,7 +2,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 
-class StackLinkedList{
+class StackArray{
 
   constructor(){
 
@@ -22,10 +22,10 @@ class StackLinkedList{
       this.resetButton
   ];
   this.backButton = document.getElementById("back");
-  this.backButton.disabled = true;
   this.nextButton = document.getElementById("next");
   this.nextButton.onclick = this.nextButtonClick.bind(this);
   this.nextButton.disabled = true;
+
 
 
 
@@ -44,7 +44,7 @@ class StackLinkedList{
     this.drawTask.splice(0,1);
     if(this.drawTask.length == 0){
       this.enableUI();
-      this.nextButton.disabled = true;
+
     }
   }
 
@@ -56,11 +56,12 @@ class StackLinkedList{
 
   push(){ //푸쉬 버튼을 눌렀을떄 할일
 
-    if(this.stack.length == 8){//메모리가 가득 차거나 입력이 없는 경우
+    if(this.top == 7){//메모리가 가득 차거나 입력이 없는 경우
       // TODO: 메모리가 가득차서 추가불가능
-      this.initBoard();
-      this.drawStack();
-      ctx.font = '15px Arial';
+      ctx.beginPath()
+      ctx.fillStyle = "#fef";
+      ctx.fillRect(20,10,600,30);
+      ctx.fillStyle = "#000";
       ctx.fillText("스택이 가득차서 삽입 불가! (할당 가능공간 없음)" ,20,30);
       return;
     }
@@ -70,59 +71,75 @@ class StackLinkedList{
     }
     this.top +=1;
     this.stack.push(value);
+    this.disableUI();
     this.drawTask.push(()=>{
-      
+      ctx.beginPath();
+      ctx.fillStyle = "#fef";
+      ctx.fillRect(280,50,50,1000);
+      ctx.fillStyle = "#000";
+      ctx.fillText("TOP >",280,100+350/8*(7-this.top));
+      ctx.closePath();
+    });
+    this.drawTask.push(()=>{
+      ctx.beginPath();
+      ctx.fillText(this.stack[this.top],440,80+350/8*(7-this.top));
+      ctx.closePath();
+    });
+    this.drawTask.push(()=>{
+      ctx.beginPath();
+      ctx.fillStyle = "#fef";
+      ctx.fillRect(20,10,600,30);
+      ctx.fillStyle = "#000";
+      ctx.fillText("삽입된 값 : "+this.stack[this.top] ,20,30);
+      ctx.closePath();
     });
 
 
   }
   pop(){//pop 버튼을 눌렀을때 할일
-    if(!this.top){//스택이 비었으면
+    if(this.top == -1){//스택이 비었으면
       // TODO: 스택이 비어서 삭제 불가
       this.initBoard();
       ctx.font = '15px Arial';
       ctx.fillText("스택이 비어서 삭제 불가!" ,20,30);
       return;
     }
-    this.returnData = this.top.value;
-    this.top = this.top.next;
-    this.stack.splice(this.stack.length-1,1);
-    // TODO: 변화하는 과정 그리기, 그리는동안 푸쉬 팝 불가
-    this.nextButton.disabled = false;
     this.disableUI();
+    this.returnData = this.stack[this.top];
+    this.stack.splice(this.top,1);
+    this.top -=1 ;
 
-    // TODO:  그리기 시작
-    this.drawTask.push(()=>{
-      ctx.font = '15px Arial';
-      ctx.fillStyle = "#fef";
-      ctx.fillRect(20,5,100,30);
-      ctx.fillStyle = "#000";
-      ctx.fillText("반환값 : " + this.returnData,20,30);
-    })
     this.drawTask.push(()=>{
       ctx.beginPath();
-      ctx.font = '15px Arial';
-      ctx.fillText("TOP",900-(this.stack.length)*100+20,220);
-      ctx.fillStyle = "#fef"; //#fef
-      ctx.fillRect(900-(this.stack.length+1)*100,205,50,50);
-      ctx.fill();
+      ctx.fillStyle = "#fef";
+      ctx.fillRect(20,10,600,30);
+      ctx.fillStyle = "#000";
+      ctx.fillText("반환된 값 : "+this.returnData ,20,30);
       ctx.closePath();
     });
     this.drawTask.push(()=>{
+      ctx.beginPath();
+      ctx.fillStyle = "#fef";
+      ctx.fillRect(410,350/8*(7-this.top)+10,80,30);
+      ctx.closePath();
+    });
+
+
+
+    this.drawTask.push(()=>{
+      ctx.beginPath();
+      ctx.fillStyle = "#fef";
+      ctx.fillRect(280,50,50,1000);
       ctx.fillStyle = "#000";
-      this.drawStack();
-      ctx.fillText("반환값 : " + this.returnData,20,30);
-    }
-
-    );
+      ctx.fillText("TOP >",280,100+350/8*(7-this.top));
+      ctx.closePath();
+    });
 
 
-
-    //this.enableUI();
   }
   reset(){//리셋 버튼을 눌렀을때 할 일
 
-    this.top = null;
+    this.top = -1;
     this.stack = [];
     this.initBoard();
     this.nextButton.disabled = true;
@@ -135,12 +152,14 @@ class StackLinkedList{
     for(var i = 0; i < this.navigator.length;i++){
       this.navigator[i].disabled = true;
     }
+      this.nextButton.disabled = false;
 
   }
   enableUI(){
     for(var i = 0; i < this.navigator.length;i++){
       this.navigator[i].disabled = false;
     }
+      this.nextButton.disabled = true;
   }
 
 
@@ -180,4 +199,4 @@ class StackLinkedList{
 
 }
 
-var k = new StackLinkedList();
+var k = new StackArray();
