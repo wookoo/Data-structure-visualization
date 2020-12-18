@@ -8,7 +8,7 @@ class Node{
   }
 }
 
-class StackLinkedList{
+class QueueLinkedList{
 
   constructor(){
 
@@ -274,4 +274,4 @@ class StackLinkedList{
 
 }
 
-var k = new StackLinkedList();
+var k = new QueueLinkedList();
