@@ -1,0 +1,54 @@
+h1 { /*h1 태그의 스타일*/
+    font-size: 2.75em;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 1em 0;
+    letter-spacing: -0.035em;
+
+}
+body{ /*body 태그의 스타일*/
+			color: #585858;/*글자 색상*/
+			font-size: 14pt;/*폰트 크기*/
+
+}
+div#main{ /*id 가 main 인 div 태그의 스타일*/
+	position:absolute;
+	width: 900px;/*가로 크기 설정*/
+	left:0;
+	right:0;
+	margin-left: auto;
+	margin-right: auto;
+  margin-bottom: 100px;
+  padding-bottom: 200px; /*밑에 패딩을 줌*/
+
+}
+article{/*article 태그의 스타일*/
+	margin-top: 10px;
+	margin-left: 10px;
+	padding-top: 50px;
+	border: solid #000 1px;
+	padding-bottom: 50px;
+	height: 300px;
+}
+img{
+	display: block; /*블록배치 설정*/
+  margin: 0px 0px;
+	width: 250px;
+	height: 200px;
+}
+div.image{
+	border : 1px solid #000;
+	height: 70%;
+}
+
+section{/*section 태그의 스타일*/
+	display: grid; /*그리드 배치 적용 , 33% 사용*/
+	grid-template-columns: 33% 33% 33%;
+}
+header p {
+    margin-top: -1em;
+}
+a:visited,a:link,a:hover,a:active{ /*하이퍼링크 옵션*/
+  text-decoration: none;
+  color : black; /*색상 검정으로하고 밑줄 등 없앰*/
+}

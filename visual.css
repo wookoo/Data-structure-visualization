@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+#header{ /*id 가 header 인 요소는 아래 스타일 적용*/
+	color : #fff; /*글자색 설정*/
+	background: #0061FF; /*배경색 설정*/
+	padding: 10px 10px 10px 10px;
+}
+h1{ /*h1 요소의 마진을 없앰*/
+	margin: 0px
+}
+
+#navigator,#playcontrolerdiv{ /*id 가 네비게이터나 플레이컨트롤러div 면 아래 스타일 적용*/
+	background: #87CEEB;/*배경색 설정*/
+	padding: 5px 5px 5px 5px; /*패딩 설정*/
+}
